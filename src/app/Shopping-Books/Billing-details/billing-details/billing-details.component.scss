@@ -1,0 +1,22 @@
+section.billind-card {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    box-shadow: 0px 0px 5px;
+    max-width: 750px;
+
+    ::ng-deep mat-grid-tile.mat-grid-tile {
+        text-align: center;
+    }
+    
+    ::ng-deep mat-grid-tile.mat-grid-tile:first-child .material-icons {
+       font-size: 20em;
+    }
+    ::ng-deep mat-grid-tile.mat-grid-tile:last-child {
+        background: whitesmoke;
+    }
+    .example-button-row {
+        display: table-cell;
+        width: 490px;
+      }
+}
