@@ -2,24 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { Book, BookItem } from '../State/Book.Model';
+import { catchError, tap } from 'rxjs/operators';
 
+import { BookItem } from '../State/Interface/book.Model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SearchService {
+export class BookSearchService {
 
   private  booksUrl = 'https://www.googleapis.com/books/v1/volumes?q=';
 
   constructor(private http: HttpClient) { }
-  
-
-  getBooks(title: string): Observable<BookItem[]> {
-    return this.http
-      .get<Book>(this.booksUrl+title)
-      .pipe(map((data: Book) => data.items));
+   
+  getBooks(value: string) {
+    return this.http.get<{ items: BookItem[] }>(this.booksUrl+value);;
   }
-
 }

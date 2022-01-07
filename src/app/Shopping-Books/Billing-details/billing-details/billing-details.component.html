@@ -6,7 +6,7 @@
             </span>
         </mat-grid-tile>
         <mat-grid-tile>
-            <form [formGroup]="billingForm" (ngSubmit)="onSubmit(billingForm)">
+            <form novalidate [formGroup]="billingForm" (ngSubmit)="submitOrder(billingForm)">
                 <h4> Billing Details</h4>
              <mat-form-field appearance="fill">
                 <mat-label>Your Name</mat-label>
@@ -15,17 +15,17 @@
               </mat-form-field>
              <mat-form-field appearance="fill">
                 <mat-label>Your Email</mat-label>
-                <input matInput placeholder="pat@example.com" formControlName="email" required>
+                <input matInput placeholder="user@example.com" formControlName="email">
                 <mat-error>Enter valid Email</mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Your phone number</mat-label>
-                <input matInput placeholder="1231231234" formControlName="phone" required>
+                <input matInput placeholder="1234567890" formControlName="phone">
                 <mat-error>Enter valid phone number</mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Your Address</mat-label>
-                <input matInput placeholder="address" formControlName="address" required>
+                <input matInput placeholder="address" formControlName="address">
                 <mat-error>Enter valid Address</mat-error>
               </mat-form-field>
               <div class="example-button-row">

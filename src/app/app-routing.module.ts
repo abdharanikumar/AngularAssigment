@@ -9,7 +9,7 @@ const appRoutes: Routes = [
           import('./Shopping-Books/Search/search.module').then(m => m.SearchModule)
         },
         {
-          path: 'billingDetails',
+          path: 'billingdetails',
           loadChildren: () =>
             import('./Shopping-Books/Billing-details/billing-details.module').then(m => m.BillingDetailsModule)
         },
@@ -19,7 +19,7 @@ const appRoutes: Routes = [
               import('./Shopping-Books/Cart/cart.module').then(m=> m.CartModule)
         },
         {
-          path: 'myCollections',
+          path: 'mycollections',
           loadChildren: () =>
             import('./Shopping-Books/MyCollections/mycollections.module').then(m=> m.MycollectionsModule)
         },

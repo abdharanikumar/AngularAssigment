@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BookItem } from '../../State/Book.Model';
+import { BookItem } from '../../State/Interface/book.Model';
 
 @Component({
   selector: 'app-book-list',

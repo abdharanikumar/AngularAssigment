@@ -1,26 +1,25 @@
-<div *ngIf = "userSelectedBook">
-    <mat-card-header>
-      <mat-card-title>{{userSelectedBook.volumeInfo.title}}</mat-card-title>
-    </mat-card-header>
-    <span *ngIf = "userSelectedBook.volumeInfo.imageLinks"></span><img mat-card-image src="{{userSelectedBook.volumeInfo.imageLinks?.smallThumbnail}}">
-    <div>
-       <p>Rating: {{userSelectedBook.volumeInfo.averageRating}}</p>
-        <p>Publisher: {{userSelectedBook.volumeInfo.publisher}}</p>
-        <p>Page Count: {{userSelectedBook.volumeInfo.pageCount}}</p>
-        <p>Language: {{userSelectedBook.volumeInfo.language}}</p>
-    </div>
-    <mat-card-content>
-      <p>
-        {{userSelectedBook.volumeInfo.description}}
-      </p>
-      <span>Written By: </span>
-      <span>{{userSelectedBook.volumeInfo.publisher}}</span>
-    </mat-card-content>
-  
-  <div>
-    <button mat-flat-button color="accent" (click)='addToCart()'>ADD TO CART</button>
-    <button mat-flat-button color="accent" (click)="buyNow()">BUY</button>
+<section class="book-details">
+  <div class="book-card">
+      <div class="field-1">
+          <h4 class="h4-style">{{userSelectedBook?.volumeInfo?.title}}</h4>
+          <img class="img-style" [src]="userSelectedBook?.volumeInfo?.imageLinks?.thumbnail">
+      </div>
+      <div class="field-2">
+          <b>Rating: <span>{{userSelectedBook?.volumeInfo?.averageRating}}</span></b>
+          <b>Publisher: <span class="f-weight-normal">{{userSelectedBook?.volumeInfo?.publisher}}</span></b>
+          <b>Page Count: <span class="f-weight-normal">{{userSelectedBook?.volumeInfo?.pageCount}}</span></b>
+          <b>Language: <span class="f-weight-normal">{{userSelectedBook?.volumeInfo?.language}}</span></b>
+      </div>
+      <div class="field-3">
+          <p>{{userSelectedBook?.volumeInfo?.description}}</p>
+          <b class="m-0">Written By:</b>
+          <p class="m-0">{{userSelectedBook?.volumeInfo?.authors?.toString()}}</p>
+      </div>
+      <div class="example-button-row">
+          <button mat-raised-button color="accent" (click)="addToCart(userSelectedBook)"
+           style=" margin-right: 15px;">Add to Cart</button>
+          <button mat-raised-button color="accent" (click)="buyNow(userSelectedBook)">Buy Now</button>
+      </div>
   </div>
-
-</div>
+</section>
 

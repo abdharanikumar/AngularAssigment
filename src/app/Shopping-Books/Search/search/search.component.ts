@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { BookItem } from '../../State/Book.Model';
-import { SearchService } from '../search.service';
+import { BooksFacade } from '../../State/book.facade';
+import { BookItem } from '../../State/Interface/book.Model';
+import { BookSearchService } from '../search.service';
 
 @Component({
   selector: 'app-search',
@@ -13,17 +14,18 @@ export class SearchComponent implements OnInit {
   searchValue = '';
   books$!: Observable<BookItem[]>;
 
-  constructor(private route: Router,private searchService:SearchService) { }
+  constructor(private router: Router,
+    private booksFacade: BooksFacade) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
+    this.books$ = this.booksFacade.books$;
   }
 
-
-  searchBtnClicked(): void{
-    this.books$ = this.searchService.getBooks(this.searchValue);
+  OnSearchBtnClicked(): void{
+    this.booksFacade.loadAllBooks(this.searchValue);
   }
 
-  bookSelected(id:string){
-    this.route.navigate(['/bookDetail',id]);
+  OnBookSelected(id:string){
+    this.router.navigate(['/bookdetail',id]);
   }
 }

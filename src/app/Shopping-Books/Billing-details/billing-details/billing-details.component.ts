@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { BookPurchasedComponent } from '../../BookPurchased/book-purchased/book-purchased.component';
+import { BooksFacade } from '../../State/book.facade';
+import { MatDialog } from '@angular/material/dialog';
+import { BookItem } from '../../State/Interface/book.Model';
 
 @Component({
   selector: 'app-billing-details',
@@ -7,27 +11,42 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
   styleUrls: ['./billing-details.component.scss']
 })
 export class BillingDetailsComponent implements OnInit {  
-  billingForm : FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [Validators.required]),
-    address: new FormControl('', [Validators.required]),
-  });
-  
-  constructor(){
+  billingForm! : FormGroup;
+  selectedBook!: BookItem[];
+  constructor(private dialog: MatDialog,private booksFacade: BooksFacade){
    }
 
   ngOnInit():void {
-         
+    this.billingForm = new FormGroup({
+    email: new FormControl('', {validators: [Validators.required, Validators.email]}),
+    name: new FormControl('', { validators: [Validators.required] }),
+    phone: new FormControl('', { validators: [Validators.required] }),
+    address: new FormControl('', { validators: [Validators.required] })
+    });
   }
   
-  onSubmit(form : any){
+  submitOrder(form :any){
     if(form.value.address !== null && form.value.address !== ''){
+      this.booksFacade.purchaseListItems$.subscribe((res) => (this.selectedBook = res));
+      const orderInfo = [{
+        address : form.value.address ,
+        name : form.value.name,
+        email : form.value.email,
+        phone : form.value.phone
+      }];
+      this.booksFacade.addBookToCollections(this.selectedBook, orderInfo);       
       form.reset();
       Object.keys(form.controls).forEach(key => {
         form.get(key).setErrors(null) ;
       });
+      this.displayPopUp();
     }
-  }
+  } 
 
+  displayPopUp(): void {
+    this.dialog.open(BookPurchasedComponent, {
+      width: '500px',
+      data: {msg: "Book Purchase is Successful"}
+    });
+  }
 }

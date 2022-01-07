@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { BookItem } from '../../State/Book.Model';
+import { BookItem } from '../../State/Interface/book.Model';
 import { ActivatedRoute , Params ,Router} from '@angular/router';
-import { SearchService } from '../../Search/search.service';
+import { BookSearchService } from '../../Search/search.service';
 import { Observable } from 'rxjs';
+import { BooksFacade } from '../../State/book.facade';
+import { select, Store } from '@ngrx/store';
+import * as selector from '../../State/book.selector';
 
 @Component({
   selector: 'app-book-details',
@@ -12,32 +15,34 @@ import { Observable } from 'rxjs';
 export class BookDetailsComponent implements OnInit {
 
   books!: Observable<BookItem[]>;
-  userSelectedBook! : BookItem;
-  bookId!: string;
+  userSelectedBook!: BookItem;
+  bookId! : string;
+  allBooks$!: Observable<BookItem[]>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private route: Router,
-    private searchService : SearchService
+    private store: Store<selector.State>,
+    private booksFacade: BooksFacade
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.bookId = params['id']);
-    this.searchService.getBooks(this.bookId).subscribe(data => {
-      data.forEach(data => {
-        if (data['id'] === this.bookId) {
-          this.userSelectedBook = Object.assign({}, data);
-        }
-      })
+
+    this.store.pipe(select(selector.getBooks)).subscribe((books)=>{
+      this.userSelectedBook = books.find((book: BookItem) => {
+        return book.id === this.bookId;
+      });
     });
   }
 
-  addToCart(){
-    this.route.navigate(['billingDetails']);
+  addToCart(book : BookItem){
+    this.booksFacade.addBookToCart(book);
   }
 
-  buyNow(){
-    this.route.navigate(['billingDetails']);
+  buyNow(book: BookItem){
+    this.booksFacade.addBookToPurchaseListItems([book]);
+    this.route.navigate(['billingdetails']);
   }
 
 }

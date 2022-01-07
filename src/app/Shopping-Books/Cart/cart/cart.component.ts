@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { BookItem } from '../../State/Book.Model';
+import { BooksFacade } from '../../State/book.facade';
+import { BookItem } from '../../State/Interface/book.Model';
 
 
 @Component({
@@ -12,9 +13,23 @@ import { BookItem } from '../../State/Book.Model';
 })
 export class CartComponent implements OnInit {
 
-  constructor(public route: Router) { }
+  cartBooks$!: Observable<BookItem[]>;
+
+  constructor(private route: Router,
+              private booksFacade: BooksFacade) { }
+              
 
   ngOnInit() {
+    this.cartBooks$ = this.booksFacade.cartBooks$;
+  }
+
+  clearCartClicked(payload:BookItem){
+    this.booksFacade.clearBookfromCart(payload);
+  }
+
+  purchaseClicked(books: BookItem[]){
+    this.booksFacade.addBookToPurchaseListItems(books);
+    this.route.navigate(['billingdetails']);
   }
 
 }

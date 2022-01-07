@@ -3,13 +3,13 @@
         <mat-form-field>
             <mat-label>Search Library</mat-label>
             <input matInput type="text" [(ngModel)]="searchValue">
-            <button mat-button matSuffix mat-icon-button (click) = "searchBtnClicked()">
+            <button mat-button matSuffix mat-icon-button (click) = "OnSearchBtnClicked()">
               <mat-icon>search</mat-icon>
             </button>
           </mat-form-field>
     </div>
     <div class = "search-list-container"  *ngIf="books$ | async as books">
-        <div class = "book-container"  *ngFor="let book of books" (click) = "bookSelected(book.id)">
+        <div class = "book-container"  *ngFor="let book of books" (click) = "OnBookSelected(book.id)">
             <app-book-list [book]="book"></app-book-list>
         </div>
     </div>

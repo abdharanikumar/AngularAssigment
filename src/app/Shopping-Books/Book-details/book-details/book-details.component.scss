@@ -1,29 +1,38 @@
- .mat-card-image {
-    width: calc(10% + 32px) !important;
-    margin: 0;
-    float: right;
+  .book-details {
+    width: 95%;
+    height: 95%;
+   }
+
+   .book-card {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    padding: 15px;
+    box-shadow: 0px 0px 4px 1px grey;
+    .field-1{
+        display: flex;
+      .img-style {
+          width: 15%;
+          float: right;
+          max-width: 85px;
+          text-align: right;
+          margin-left: 15px;
+        }
+        .h4-style {
+          width: 85%;
+          float: left;
+          margin-top: 0;
+        }
+    }
+    .field-2 b {
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+  
+  .f-weight-normal {
+    font-weight: normal;
   }
   
   
-  .parent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  img{
-    height: 300px;
-  }
-  mat-card-content > p {
-    clear: both;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  button {
-  margin-top: 20px;
-  margin-left: 20px;
-  }
-
   

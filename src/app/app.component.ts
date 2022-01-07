@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { Observable } from 'rxjs';
+import { BooksFacade } from './Shopping-Books/State/book.facade';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'myapp';
+  
+  cartItemsCount$!: Observable<number>;
+  title="myapp";
+
+
+  constructor(private booksFacade: BooksFacade) { 
+  }
+
+  ngOnInit() { 
+    this.cartItemsCount$ = this.booksFacade.cartItemsCount$;
+  } 
 }

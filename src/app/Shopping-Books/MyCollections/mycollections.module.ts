@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BookListModule } from '../Book-list/book-list.module';
 
 const collectionRoute: Routes = [
-  { path: 'myCollections', component: MycollectionsComponent }
+  { path: '', component: MycollectionsComponent }
 ];
 
 
@@ -14,7 +14,7 @@ const collectionRoute: Routes = [
     MycollectionsComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule, // If you are making your own module ,should include this,
     RouterModule.forChild(collectionRoute),
     BookListModule
   ]
