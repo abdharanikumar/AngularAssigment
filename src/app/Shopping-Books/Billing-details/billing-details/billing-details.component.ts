@@ -4,6 +4,7 @@ import { BookPurchasedComponent } from '../../BookPurchased/book-purchased/book-
 import { BooksFacade } from '../../State/book.facade';
 import { MatDialog } from '@angular/material/dialog';
 import { BookItem } from '../../State/Interface/book.Model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-billing-details',
@@ -44,9 +45,7 @@ export class BillingDetailsComponent implements OnInit {
   } 
 
   displayPopUp(): void {
-    this.dialog.open(BookPurchasedComponent, {
-      width: '500px',
-      data: {msg: "Book Purchase is Successful"}
-    });
+    this.dialog.open(BookPurchasedComponent);
   }
 }
+

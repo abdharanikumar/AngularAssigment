@@ -1,19 +1,19 @@
 <section class="book-details">
   <div class="book-card">
       <div class="field-1">
-          <h4 class="h4-style">{{userSelectedBook?.volumeInfo?.title}}</h4>
-          <img class="img-style" [src]="userSelectedBook?.volumeInfo?.imageLinks?.thumbnail">
+          <h4 class="h4-style">{{title}}</h4>
+          <img class="img-style" [src]="thumbnail">
       </div>
       <div class="field-2">
-          <b>Rating: <span>{{userSelectedBook?.volumeInfo?.averageRating}}</span></b>
-          <b>Publisher: <span class="f-weight-normal">{{userSelectedBook?.volumeInfo?.publisher}}</span></b>
-          <b>Page Count: <span class="f-weight-normal">{{userSelectedBook?.volumeInfo?.pageCount}}</span></b>
-          <b>Language: <span class="f-weight-normal">{{userSelectedBook?.volumeInfo?.language}}</span></b>
+          <b>Rating: <span>{{averageRating}}</span></b>
+          <b>Publisher: <span class="f-weight-normal">{{publisher}}</span></b>
+          <b>Page Count: <span class="f-weight-normal">{{pageCount}}</span></b>
+          <b>Language: <span class="f-weight-normal">{{language}}</span></b>
       </div>
       <div class="field-3">
-          <p>{{userSelectedBook?.volumeInfo?.description}}</p>
+          <p>{{description}}</p>
           <b class="m-0">Written By:</b>
-          <p class="m-0">{{userSelectedBook?.volumeInfo?.authors?.toString()}}</p>
+          <p class="m-0">{{authors}}</p>
       </div>
       <div class="example-button-row">
           <button mat-raised-button color="accent" (click)="addToCart(userSelectedBook)"

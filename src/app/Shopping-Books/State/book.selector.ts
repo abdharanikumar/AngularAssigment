@@ -3,8 +3,6 @@ import { createFeatureSelector, createSelector, ActionReducerMap } from '@ngrx/s
 import * as Booksreducer from './book.reducers';
 import { BooksState } from './book.reducers';
 
-export interface State extends EntityState<BooksState> {}
-
 
 const getBookFeatureState = createFeatureSelector<BooksState>('books');
 

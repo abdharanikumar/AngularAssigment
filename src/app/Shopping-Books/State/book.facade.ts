@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as ReducerBook from './book.selector';
+import * as BookSelector from './book.selector';
+import * as BookReducer from './book.reducers';
 import * as BookActions from './book.actions';
 import {  BookItem } from './Interface/book.Model';
 import { Store, select } from '@ngrx/store';
@@ -12,14 +13,14 @@ export class BooksFacade {
 
   //selecting from store 
   
-  books$ = this.store.pipe(select(ReducerBook.getBooks)) as Observable<BookItem[]>;
-  cartBooks$ = this.store.pipe(select(ReducerBook.getCartItems)) as Observable<BookItem[]>;
-  collectionBooks$ =  this.store.pipe(select(ReducerBook.getCollectionItems)) as Observable<BookItem[]>;
-  cartItemsCount$ = this.store.pipe(select(ReducerBook.getCartItemsCount)) as Observable<number>;
-  purchaseListItems$ = this.store.pipe(select(ReducerBook.getPurchaseItems)) as Observable<BookItem[]>;
+  books$ = this.store.pipe(select(BookSelector.getBooks)) as Observable<BookItem[]>;
+  cartBooks$ = this.store.pipe(select(BookSelector.getCartItems)) as Observable<BookItem[]>;
+  collectionBooks$ =  this.store.pipe(select(BookSelector.getCollectionItems)) as Observable<BookItem[]>;
+  cartItemsCount$ = this.store.pipe(select(BookSelector.getCartItemsCount)) as Observable<number>;
+  purchaseListItems$ = this.store.pipe(select(BookSelector.getPurchaseItems)) as Observable<BookItem[]>;
 
   constructor(
-    private store: Store<ReducerBook.State>,
+    private store: Store<BookReducer.State>,
   ) { }
 
   //Dispatching actions

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BookItem } from '../../State/Interface/book.Model';
 import { ActivatedRoute , Params ,Router} from '@angular/router';
-import { BookSearchService } from '../../Search/search.service';
 import { Observable } from 'rxjs';
 import { BooksFacade } from '../../State/book.facade';
 import { select, Store } from '@ngrx/store';
-import * as selector from '../../State/book.selector';
+import * as BookReducer from '../../State/book.reducers';
+import * as BookSelector from '../../State/book.selector';
+
 
 @Component({
   selector: 'app-book-details',
@@ -22,14 +23,13 @@ export class BookDetailsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private route: Router,
-    private store: Store<selector.State>,
     private booksFacade: BooksFacade
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.bookId = params['id']);
 
-    this.store.pipe(select(selector.getBooks)).subscribe((books)=>{
+    this.booksFacade.books$.subscribe((books)=>{
       this.userSelectedBook = books.find((book: BookItem) => {
         return book.id === this.bookId;
       });
@@ -43,6 +43,38 @@ export class BookDetailsComponent implements OnInit {
   buyNow(book: BookItem){
     this.booksFacade.addBookToPurchaseListItems([book]);
     this.route.navigate(['billingdetails']);
+  }
+
+  get title(): string {
+    return this.userSelectedBook?.volumeInfo?.title;
+  }
+
+  get thumbnail(): string {
+    return this.userSelectedBook?.volumeInfo?.imageLinks?.thumbnail;
+  }
+
+  get averageRating(): number {
+    return this.userSelectedBook?.volumeInfo?.averageRating;
+  }
+
+  get publisher(): string {
+    return this.userSelectedBook.volumeInfo.publisher;
+  }
+
+  get pageCount(): number {
+    return this.userSelectedBook?.volumeInfo?.pageCount;
+  }
+
+  get language(): string {
+    return this.userSelectedBook.volumeInfo.language;
+  }
+  
+  get description(): string {
+    return this.userSelectedBook.volumeInfo.description;
+  }
+
+  get authors(): string {
+    return this.userSelectedBook.volumeInfo.authors.toString();
   }
 
 }

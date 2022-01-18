@@ -33,6 +33,10 @@ export interface BooksState {
   purchaseList : [];
 }
 
+
+export interface State extends EntityState<BooksState> {}
+
+
 const booksReducer = createReducer(
   initialState,
   on(BooksActions.LoadBooksSuccess, (state, { payload }) => {

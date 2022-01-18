@@ -11,9 +11,7 @@ import { BooksFacade } from './Shopping-Books/State/book.facade';
 export class AppComponent {
   
   cartItemsCount$!: Observable<number>;
-  title="myapp";
-
-
+ 
   constructor(private booksFacade: BooksFacade) { 
   }
 

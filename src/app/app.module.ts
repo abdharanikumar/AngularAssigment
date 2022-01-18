@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import {MaterialsModule} from './materials/materials.module';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { SharedModule } from './shared.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BookSearchService } from './Shopping-Books/Search/search.service';
 import { HttpClientModule } from '@angular/common/http';
 import { shopBooksReducer } from './Shopping-Books/State/book.reducers';
@@ -22,7 +21,6 @@ import { BooksModule } from './Shopping-Books/State/book.module';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
     MaterialsModule,
     SharedModule ,
